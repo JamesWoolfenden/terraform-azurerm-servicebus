@@ -50,26 +50,26 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_container_registry.example](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry) | resource |
+| [azurerm_servicebus_namespace.example](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_namespace) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_acr"></a> [acr](#input\_acr) | n/a | <pre>object({<br>    name                = string,<br>    resource_group_name = string<br>    location            = string<br>    sku                 = string<br>  })</pre> | n/a | yes |
-| <a name="input_anonymous_pull"></a> [anonymous\_pull](#input\_anonymous\_pull) | n/a | `bool` | `false` | no |
-| <a name="input_encryption"></a> [encryption](#input\_encryption) | n/a | <pre>object({<br>    enabled            = bool<br>    key_vault_key_id   = string<br>    identity_client_id = string<br>  })</pre> | n/a | yes |
-| <a name="input_public_network_access"></a> [public\_network\_access](#input\_public\_network\_access) | n/a | `bool` | `false` | no |
-| <a name="input_quarantine_policy"></a> [quarantine\_policy](#input\_quarantine\_policy) | n/a | `bool` | `true` | no |
-| <a name="input_replications"></a> [replications](#input\_replications) | n/a | <pre>list(object({<br>    location                  = string<br>    regional_endpoint_enabled = bool<br>    zone_redundancy_enabled   = bool<br>    tags                      = map(string)<br>  }))</pre> | n/a | yes |
-| <a name="input_retention_policy"></a> [retention\_policy](#input\_retention\_policy) | n/a | `bool` | `true` | no |
-| <a name="input_trust_policy"></a> [trust\_policy](#input\_trust\_policy) | n/a | `bool` | `true` | no |
+| <a name="input_capacity"></a> [capacity](#input\_capacity) | n/a | `number` | `0` | no |
+| <a name="input_cmk"></a> [cmk](#input\_cmk) | n/a | <pre>list(object({<br>    key_vault_key_id = string<br>    identity_id      = string<br>  }))</pre> | n/a | yes |
+| <a name="input_identity"></a> [identity](#input\_identity) | n/a | <pre>object({<br>    type         = string<br>    identity_ids = list(string)<br>  })</pre> | <pre>{<br>  "identity_ids": [],<br>  "type": "SystemAssigned"<br>}</pre> | no |
+| <a name="input_local_auth_enabled"></a> [local\_auth\_enabled](#input\_local\_auth\_enabled) | n/a | `bool` | `false` | no |
+| <a name="input_location"></a> [location](#input\_location) | n/a | `string` | n/a | yes |
+| <a name="input_minimum_tls_version"></a> [minimum\_tls\_version](#input\_minimum\_tls\_version) | n/a | `string` | `"1.2"` | no |
+| <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | n/a | `bool` | `false` | no |
+| <a name="input_rg_name"></a> [rg\_name](#input\_rg\_name) | n/a | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | This is to help you add tags to your cloud objects | `map(any)` | n/a | yes |
+| <a name="input_zone_redundant"></a> [zone\_redundant](#input\_zone\_redundant) | n/a | `bool` | `false` | no |
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_registry"></a> [registry](#output\_registry) | n/a |
+No outputs.
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Policy
