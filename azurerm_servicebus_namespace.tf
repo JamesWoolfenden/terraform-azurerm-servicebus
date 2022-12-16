@@ -1,21 +1,24 @@
 resource "azurerm_servicebus_namespace" "example" {
   name                = "tfex-servicebus-namespace"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = var.location
+  resource_group_name = var.rg_name
   sku                 = "Standard"
 
   //check
   identity {
-    type         = var.identity.user
-    identity_ids = var.identity_ids
+    type         = var.identity.type
+    identity_ids = var.identity.identity_ids
   }
 
   capacity = var.capacity
 
   //check this set
-  customer_managed_key {
-    key_vault_key_id = ""
-    identity         = ""
+  dynamic "customer_managed_key" {
+    for_each = var.cmk
+    content {
+      key_vault_key_id = customer_managed_key.value["key_vault_key_id"]
+      identity_id      = customer_managed_key.value["identity_id"]
+    }
   }
 
   //check
@@ -29,13 +32,19 @@ resource "azurerm_servicebus_namespace" "example" {
 }
 
 variable "identity" {
-  type = map(any)
+  type = object({
+    type         = string
+    identity_ids = list(string)
+  })
   default = {
-    type         = ["SystemAssigned"]
+    type         = "SystemAssigned"
     identity_ids = []
   }
 }
 
 variable "cmk" {
-  type = map(any)
+  type = list(object({
+    key_vault_key_id = string
+    identity_id      = string
+  }))
 }
