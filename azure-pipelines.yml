@@ -15,4 +15,4 @@ steps:
 - script: rm yor.tar.gz 
 - script: sudo chmod +x /usr/bin/yor 
 - script: echo 'alias yor="/usr/bin/yor"' >> ~/.bashrc
-- script: yor --version
+- script: /usr/bin/yor --version
