@@ -34,3 +34,20 @@ variable "zone_redundant" {
   type    = bool
   default = false
 }
+variable "identity" {
+  type = object({
+    type         = string
+    identity_ids = list(string)
+  })
+  default = {
+    type         = "SystemAssigned"
+    identity_ids = []
+  }
+}
+
+variable "cmk" {
+  type = list(object({
+    key_vault_key_id = string
+    identity_id      = string
+  }))
+}

@@ -16,8 +16,9 @@ resource "azurerm_servicebus_namespace" "example" {
   dynamic "customer_managed_key" {
     for_each = var.cmk
     content {
-      key_vault_key_id = customer_managed_key.value["key_vault_key_id"]
-      identity_id      = customer_managed_key.value["identity_id"]
+      key_vault_key_id                  = customer_managed_key.value["key_vault_key_id"]
+      identity_id                       = customer_managed_key.value["identity_id"]
+      infrastructure_encryption_enabled = true
     }
   }
 
@@ -29,22 +30,4 @@ resource "azurerm_servicebus_namespace" "example" {
   minimum_tls_version = var.minimum_tls_version
   zone_redundant      = var.zone_redundant
   tags                = var.tags
-}
-
-variable "identity" {
-  type = object({
-    type         = string
-    identity_ids = list(string)
-  })
-  default = {
-    type         = "SystemAssigned"
-    identity_ids = []
-  }
-}
-
-variable "cmk" {
-  type = list(object({
-    key_vault_key_id = string
-    identity_id      = string
-  }))
 }
